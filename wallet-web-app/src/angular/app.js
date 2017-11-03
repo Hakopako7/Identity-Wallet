@@ -97,6 +97,14 @@ angular.module('kyc-wallet').controller('MemberSettingsMainController', MemberSe
 angular.module('kyc-wallet').controller('UserDocumentsStoragePathDialog', UserDocumentsStoragePathDialog);
 angular.module('kyc-wallet').controller('LegalTermsAndConditionsDialog', LegalTermsAndConditionsDialog);
 
+/**
+ * marketplace controllers
+ */
+import MarketplaceWalletsController from './controllers/member/marketplace/wallets-controller.js';
+import MarketplacePassportsController from './controllers/member/marketplace/passports-controller.js';
+
+angular.module('kyc-wallet').controller('MarketplaceWalletsController', MarketplaceWalletsController);
+angular.module('kyc-wallet').controller('MarketplacePassportsController', MarketplacePassportsController);
 
 /**
  * config states

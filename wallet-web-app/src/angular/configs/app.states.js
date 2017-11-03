@@ -129,38 +129,29 @@ function appStates ($urlRouterProvider, $stateProvider, $mdThemingProvider, CONF
         }
     })
 
-    .state('marketplace', {
-        abstract: true,
+    .state('member.marketplace.passports', {
+        url: '/member/marketplace/passports',
         views: {
             main: {
-                templateUrl: 'member/layout.html',
-                controller: 'MemberLayoutController'
+                //templateUrl: 'member/marketplace/main.html'
+                templateUrl: 'templates/marketplace/passports.html',
+                controller: 'MarketplacePassportsController'
             }
-        },
-        resolve: {
-            /*indexedDB: ($rootScope, $q) => {
-                let defer = $q.defer();
-                
-                $rootScope.$on('indexed-db:ready', () => {
-                    defer.resolve();
-                });
-    
-                return defer.promise;
-            },
-            configStorage: ($rootScope, $q, ConfigStorageService) => {
-                return ConfigStorageService.load();
-            }*/
         }
     })
 
-    .state('marketplace.main', {
-        url: '/marketplace/main',
+    .state('member.marketplace.wallets', {
+        url: '/member/marketplace/wallets',
         views: {
             main: {
-                templateUrl: 'templates/marketplace/main.html'
+                //templateUrl: 'member/marketplace/main.html'
+                templateUrl: 'templates/marketplace/wallets.html',
+                controller: 'MarketplaceWalletsController'
             }
         }
     })
+
+
 
     /**
      * keychain
