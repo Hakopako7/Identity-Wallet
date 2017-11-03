@@ -1,0 +1,98 @@
+.marketplaces {
+  ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    width: 118px;
+    margin: 10px 30px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+  }
+    
+  .category-item .shape {
+    margin: 50px 30px;
+    width: 118px;
+    cursor: pointer;
+    height: 65px;
+    background: #ffffff;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .category-item .shape:before {
+    content: "";
+    position: absolute;
+    top: -35px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 59px solid transparent;
+    border-right: 59px solid transparent;
+    border-bottom: 35px solid #ffffff;
+  }
+  .category-item .shape:after {
+    content: "";
+    position: absolute;
+    bottom: -35px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 59px solid transparent;
+    border-right: 59px solid transparent;
+    border-top: 35px solid #ffffff;
+  }
+
+  .category-item .shape:hover {
+    background: #2d3642;
+  }
+
+  .category-item .shape:hover {
+    background: #2d3642;
+  }
+  .category-item .shape:hover:before {
+    border-bottom: 35px solid #2d3642;
+  }
+  .category-item .shape:hover:after {
+    border-top: 35px solid #2d3642;
+  }
+  .category-item.disabled:hover .coming-soon {
+    background: yellow;
+  }
+  .category-item img {
+    max-width: 55px;
+  }
+  .category-item img.small {
+    max-width: 85px;
+  }
+
+  li.category-item.disabled span {
+    color: #AAA;
+  }
+  li.category-item.disabled .shape {
+    opacity: 0.3;
+  }
+  li.category-item .coming-soon { 
+    display: none; 
+  }
+  li.category-item.disabled .coming-soon {
+    background: lightyellow;
+    padding: 3px;
+    display: inline-block;
+    margin-top: 1em
+  }
+  li.category-item a.category-link {
+    color: #45bbf5;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+  }
+}

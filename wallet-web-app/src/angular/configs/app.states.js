@@ -123,7 +123,41 @@ function appStates ($urlRouterProvider, $stateProvider, $mdThemingProvider, CONF
         url: '/member/marketplace/main',
         views: {
             main: {
-                templateUrl: 'member/marketplace/main.html'
+                //templateUrl: 'member/marketplace/main.html'
+                templateUrl: 'templates/marketplace/main.html'
+            }
+        }
+    })
+
+    .state('marketplace', {
+        abstract: true,
+        views: {
+            main: {
+                templateUrl: 'member/layout.html',
+                controller: 'MemberLayoutController'
+            }
+        },
+        resolve: {
+            /*indexedDB: ($rootScope, $q) => {
+                let defer = $q.defer();
+                
+                $rootScope.$on('indexed-db:ready', () => {
+                    defer.resolve();
+                });
+    
+                return defer.promise;
+            },
+            configStorage: ($rootScope, $q, ConfigStorageService) => {
+                return ConfigStorageService.load();
+            }*/
+        }
+    })
+
+    .state('marketplace.main', {
+        url: '/marketplace/main',
+        views: {
+            main: {
+                templateUrl: 'templates/marketplace/main.html'
             }
         }
     })
