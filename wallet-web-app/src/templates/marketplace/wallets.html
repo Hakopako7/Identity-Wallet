@@ -1,0 +1,144 @@
+<div ng-if="list.length > 0">
+<!--{{list[8]}}-->
+<table class="table table-stripped table-responsive main-table" ng-disabled="selectedWallet">
+	<thead>
+	<tr>
+	<th>Wallet</th>
+	<th>Type</th>
+	<th>Country</th>
+	<th>Available for citizens/residents</th>
+	<th>Currencies</th>
+	<th>Add funds</th>
+	<th>Card</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr ng-repeat="wallet in list" open-flyout="" ng-click="toggleFlyout(wallet)" ng-if="wallet['Code'] && passesFilters(wallet)">
+	<td><img ng-src="{{wallet.Logo[0].url}}" alt="{{wallet['Company']}}" title="{{wallet['Company']}}"></td> <!-- Title is required for chrome bug-->
+	<td>
+		<div class="limit-height"><span ng-repeat="type in wallet.Type" class="badge badge-pill" ng-class="type == 'Current account'? 'badge-primary' : 'badge-default'">{{type}}</span></div>
+	</td>
+	<td>
+		<div class="limit-height"><i ng-repeat="country in wallet['Country incorporated']" class="flag-icon flag-icon-{{isoCountries[country] | lowercase}}"></i></div>
+	</td>
+	<td class="show-only-part">
+		<a
+		href="#"
+		class="badge badge-filter badge-hallow"
+		ng-repeat="(key, country) in wallet['Countries available']"
+		ng-if="key < 3"
+		>{{ country }}</a>
+		<a
+		href="#"
+		class="badge badge-filter badge-more more-info"
+		data-toggle="modal"
+		data-target="#modal"
+		ng-click="openModal(wallet['Countries available'], 'Available for citizens/residents of')"
+		ng-if="wallet['Countries available'].length > 3"
+		>...</a>
+	</td>
+	<td class="show-only-part">
+		<a
+		href="#"
+		class="badge badge-filter badge-{{rand}}"
+		ng-init="rand = randomClass()"
+		ng-repeat="(key, currency) in wallet['Currencies available']"
+		ng-if="key < 3"
+		>{{ currency }}</a>
+		<a
+		href="#"
+		class="badge badge-filter badge-more more-info"
+		data-toggle="modal"
+		data-target="#modal"
+		ng-click="openModal(wallet['Currencies available'], 'Currencies Available')"
+		ng-if="wallet['Currencies available'].length > 3"
+		>...</a>
+	</td>
+	<td>
+		<a
+		href="#"
+		class="badge badge-filter badge-{{rand}}"
+		ng-init="rand = randomClass()"
+		ng-repeat="(key, fund) in wallet['Add funds']"
+		ng-if="key < 3"
+		>{{ fund }}</a>
+		<a
+		href="#"
+		class="badge badge-filter badge-more more-info"
+		data-toggle="modal"
+		data-target="#modal"
+		ng-click="openModal(wallet['Add funds'], 'Add Funds')"
+		ng-if="wallet['Add funds'].length > 3"
+		>...</a>
+	</td>
+
+	<td class="popover-host">
+		<span ng-init="wallet.popoverOpened1=false" ng-mouseover="wallet.popoverOpened1=true" ng-mouseleave="wallet.popoverOpened1=false">{{popoverOpened1}}
+		<img
+		ng-repeat="card in wallet['Prepaid/Debit Card']"
+		ng-src="{{card.url}}"
+		style="width:2.5em"
+		alt="{{wallet['Debit/Prepaid card type'].join(', ')}}"
+
+		popover-trigger="none"
+		popover-is-open="wallet.popoverOpened1"
+		popover-title="Card Info"
+		popover-placement="left"
+		uib-popover-template="'myPopoverTemplate.html'"
+		>
+		</span>
+		<script type="text/ng-template" id="myPopoverTemplate.html"><div
+		class="my-popover" ng-if="wallet['Prepaid/Debit Card'].length > 0">
+		<div class="title-and-value">
+			<div class="title">Type</div>
+			<div class="values">
+			<span ng-repeat="cardType in wallet['Debit/Prepaid card type']" class="badge badge-pill badge-{{rand}}" ng-init="rand = randomClass()">{{cardType}}</span>
+			</div>
+		</div>
+		<div class="title-and-value">
+			<div class="title">Countries available</div>
+			<div class="values">
+			<span ng-repeat="country in wallet['Card countries available (residents)']" class="badge badge-info" style="background-color: transparent; color: #000; border: 1px solid #ccc">{{country}}</span>
+			</div>
+		</div>
+		<div class="title-and-value">
+			<div class="title">Currencies available</div>
+			<div class="values">
+			<span ng-repeat="currency in wallet['Card currencies available']" class="badge badge-pill badge-{{rand}}" ng-init="rand = randomClass()">{{currency}}</span>
+			</div>
+		</div>
+
+		<div class="fees">
+			<div>
+			<div class="title">Issuance fee</div>
+			<div class="value">{{wallet['Debit card issuance fee']}}</div>
+			</div>
+			<div>
+			<div class="title">Annual fee</div>
+			<div class="value">{{wallet['Debit card annual fee']}}</div>
+			</div>
+			<div>
+			<div class="title">Purchase fee</div>
+			<div class="value">{{wallet['Debit card purchase fee']}}</div>
+			</div>
+		</div>
+		<div class="fees sa">
+			<div>
+			<div class="title">Withdrawal fee</div>
+			<div class="value">{{wallet['Debit card ATM withdrawal fee']}}</div>
+			</div>
+			<div>
+			<div class="title">Crossborder fee</div>
+			<div class="value">{{wallet['Debit card crossborder transaction fee']}}</div>
+			</div>
+		</div>
+		</div></script>
+	</td>
+	</tr>
+	</tbody>
+</table>
+</div>
+
+<div ng-if="!list">
+	Loading results...
+</div>
