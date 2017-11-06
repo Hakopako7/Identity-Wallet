@@ -114,7 +114,8 @@ function appStates ($urlRouterProvider, $stateProvider, $mdThemingProvider, CONF
         abstract: true,
         views: {
             main: {
-                templateUrl: 'member/marketplace/layout.html'
+                templateUrl: 'member/marketplace/layout.html',
+                controller: 'MarketplaceRootController'
             }
         }
     })
@@ -124,10 +125,11 @@ function appStates ($urlRouterProvider, $stateProvider, $mdThemingProvider, CONF
         views: {
             main: {
                 //templateUrl: 'member/marketplace/main.html'
-                templateUrl: 'templates/marketplace/main.html'
+                templateUrl: 'templates/marketplace/main.html',
             }
         }
     })
+
 
     .state('member.marketplace.passports', {
         url: '/member/marketplace/passports',

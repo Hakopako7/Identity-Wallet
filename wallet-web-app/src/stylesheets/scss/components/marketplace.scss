@@ -96,3 +96,388 @@
     text-align: center;
   }
 }
+
+
+.badge.badge-hallow,.badge.badge-hallow:hover {
+  background-color: transparent;
+  color: #000;
+  border: 1px solid #ccc;
+}
+.badge {
+  margin-left: .1em;
+  margin-right: .1em;
+}
+.badge {
+  display: inline-block;
+  padding: .25em .4em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25rem;
+}
+a.badge {
+  text-decoration: none;
+}
+.badge-primary {
+  background-color: #0275d8;
+}
+.badge-success {
+  background-color: #5cb85c;
+}
+.badge-default {
+  background-color: #636c72;
+}
+.badge-warning {
+  background-color: #ec971f;
+}
+.badge-info {
+  background-color: #31b0d5;
+}
+
+.fade {
+  opacity: 0;
+  -webkit-transition: opacity .15s linear;
+  -o-transition: opacity .15s linear;
+  transition: opacity .15s linear;
+}
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  display: none;
+  overflow: hidden;
+  outline: 0;
+}
+
+/* WALLETS CSS */
+
+.marketplace-wallets table {
+  width: 100%;
+  border-collapse: collapse;
+
+}
+.marketplace-wallets td, .marketplace-wallets th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #eceeef;
+  padding: 0.75rem;
+  border-top: 1px solid #eceeef;
+  text-align: left;
+  background: rgba(255,255,255,0.95);
+  vertical-align: top;
+}
+.marketplace-wallets td img {
+  max-width: 50px;
+  height: auto;
+}
+
+
+
+/* ==========================================================================
+     FLY OUT DETAIL WINDOW
+     ========================================================================== */
+  
+     body.flyout-visible {
+      overflow: hidden;
+    }
+
+    body.flyout-visible  div.flyout-overlay { 
+      width: 100%;
+      height: 100%;
+      display: block;
+      opacity: 0.8;
+      background: #FFF;
+      position: fixed;
+      z-index: 8888;
+      top:0;
+      left: 0;
+    }
+    
+    .flyout-window {
+      width: 0px;
+      position: absolute;
+      
+      z-index:9999;
+      background: #FFF;
+      top: 0;
+      right: 0;
+      
+      will-change: transform;
+      transition: transform 0.33s cubic-bezier(0,0,0.3,1);
+      opacity: 0;
+      box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.75);
+      /* display: none; */
+    }
+
+
+    body.flyout-visible .flyout-window.visible {
+      width: 800px;
+      transform: translateX(800px);
+      max-width: 100%;
+      transform: translateX(0px);
+      transition: all 0.2s ease-in;
+      opacity: 0.95;
+      position:fixed;
+      display: block;
+    }
+    
+    .flyout-window header {
+      padding: 0;
+      background: #FFF;
+      height: 250px;
+      transition: height 0.3s ease-in-out;
+      overflow: hidden;
+    }
+    
+    .flyout-window button.close {
+      position: absolute;
+      background: #FFF;
+      padding: 5px 10px;
+      top: 5px;
+      right: 5px;
+      visibility: hidden;
+    }
+
+    body.flyout-visible .flyout-window button.close {
+      visibility: visible;
+      transition: all 1s ease-in;
+    }
+    
+    
+    .flyout-window.reduced header.investments {
+      height: 160px;
+    }
+    .flyout-window.reduced header {
+      height: 150px;
+    }
+    .flyout-window header > div {
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.4s ease-in-out;
+      min-height: 200px;
+    }
+    .flyout-window.reduced header > div {
+      min-height: 100px;
+    }
+    .flyout-window.reduced header h1 {
+      display: none;
+    }
+    .flyout-window header h1 {
+      display: block;
+      text-align: center;
+      color: #FFF;
+      font-size: 2em;
+      font-weight: 700;
+      text-shadow: 0 0 1px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .flyout-window header .cta {
+      text-align: center;
+      margin-top: 1em;
+    }
+    .flyout-window header .cta button {
+      box-shadow: 0 0 1px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.2);
+    }
+    
+    .flyout-window nav ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      text-align: center;
+    }
+    .flyout-window nav ul li {
+      display: inline-block;
+      padding: 10px;
+      border-bottom: 4px solid #FFF;
+      cursor: pointer;
+    }
+    .flyout-window nav li:hover {
+      border-color: #777;
+    }
+    
+    .flyout-window nav li a {
+      color: #777;
+      text-transform: capitalize;
+    }
+    .flyout-window nav li a:focus {
+      text-decoration: none;
+    }
+    .flyout-window nav li a:hover {
+      text-decoration: none;
+    }
+    
+    .flyout-window nav li.active {
+      border-color: #0275d8;
+    }
+    
+    .flyout-window.reduced #flyout-body {
+      height: 80vh;
+    }
+    .flyout-window #flyout-body {
+      height: 88vh;
+      overflow-y: auto;
+    }
+    
+    .flyout-window .flyout-details-block {
+      padding: 0 1em 4em 1em;
+      font-size: 14px;
+      overflow-x: hidden;
+    }
+    .flyout-window h2 {
+      text-transform: capitalize;
+      text-align: center;
+      font-size: 1.5em;
+      padding: 15px 0;
+    }
+    .flyoutwindow .flyout-details-block hr {
+      display: block;
+      margin: 1em auto;
+    }
+    
+    .flyout-details-block {
+      padding-bottom: 20px;
+      position: relative;
+    }
+    .flyout-details-block h2 {
+      margin: 0;
+      text-transform: capitalize;
+      padding-left: 15px;
+      font-size: 1.5em;
+      border-top: 1px solid #666;
+      border-bottom: 1px solid #666;
+      background: #EEE;
+      text-align: left;
+    }
+    .flyout-details-program ul {
+      font-size: 1em;
+      margin-top: 1em;
+    }
+    .flyout-window ul {
+      padding-left: 0px;
+      
+    }
+    
+    .flyout-details-block h3 {
+      text-transform: capitalize;
+      padding: 10px 5%;
+      font-size: 1.5em;
+      border-top: 1px solid #666;
+      border-bottom: 1px solid #666;
+      background: #EEE;
+      margin-left: -5%;
+      width: 110%;
+    
+    }
+    .flyout-details-block h4 {
+      text-transform: capitalize;
+    }
+    
+    .flyout-details-fees .fee-list {
+      display: flex;
+      flex-direction:row;
+      flex-wrap: wrap;
+    }
+    .flyout-details-fees .fee-list > div {
+      flex: 1;
+      min-width: 50%;
+      font-size: 12px;
+    }
+    .flyout-details-fees .fee-list > div strong {
+      background: lightyellow;
+    }
+    
+    .flyout-window span.badge {
+      display: inline-block;
+      margin-bottom: 0.5em;
+      margin-right: 0.5em;
+      padding: 5px;
+      max-width: 100%;
+      white-space: normal;
+      text-align: left;
+    }
+    
+    .flyout-window .country-details label, .flyout-window .investment-details label {
+      display:inline-block;
+      width: 10em;
+    }
+    
+    .flyout-window table.fees th {
+      font-weight: normal;
+    }
+    
+    
+    /*
+       FLYOUT RESPONSIVE RULES
+       ========================================================================== */
+    
+    
+    /* Custom, iPhone Retina */
+    @media only screen and (max-width : 320px) {
+    
+    }
+    
+    /* Extra Small Devices, Phones */
+    @media only screen and (max-width : 480px) {
+    
+    }
+    
+    /* Small Devices, Tablets */
+    @media only screen and (min-width : 768px) {
+    
+    }
+    
+    /* Medium Devices, Desktops */
+    @media only screen and (min-width : 992px) {
+    
+    }
+    
+    /* Large Devices, Wide Screens */
+    @media only screen and (min-width : 1200px) {
+    
+    }
+    
+    
+    /* ==========================================================================
+       BLOCK SUMMARY
+       ========================================================================== */
+    
+    
+    .flyout-window .block-summary {
+      display: flex;
+    }
+    
+    .flyout-window .block-summary > div {
+      width: 50%; padding: 10px;
+    }
+    .flyout-window .block-summary ul {
+      padding: 0;
+      list-style: none;
+    }
+    .flyout-window .block-summary li {
+      width: 340px;
+      margin-bottom: 5px;
+      text-transform: capitalize;
+    }
+    .flyout-window .block-summary li span.value {
+      float: right;
+    }
+
+    .white-space-fix {
+      white-space: pre-wrap;
+    }
+
+    .pt20 {
+      padding-top:20px;
+    }
+    .pb20 {
+      padding-bottom: 20px;
+    }

@@ -69,6 +69,10 @@ angular.module('kyc-wallet').service('CommonService', CommonService);
 angular.module('kyc-wallet').directive('countdown', CountdownDirective);
 angular.module('kyc-wallet').directive('kycProfileImage', KycProfileImageDirective);
 
+
+
+
+
 /**
  * controllers
  */
@@ -98,13 +102,45 @@ angular.module('kyc-wallet').controller('UserDocumentsStoragePathDialog', UserDo
 angular.module('kyc-wallet').controller('LegalTermsAndConditionsDialog', LegalTermsAndConditionsDialog);
 
 /**
+ * marketplace
+ */
+
+
+ /**
+ * marketplace filters
+ */
+angular.module('kyc-wallet').filter('unsafe', ['$sce', function ($sce) {
+  return function (val) {
+    return $sce.trustAsHtml(val);
+  };
+}]);
+
+angular.module('kyc-wallet').filter('longHtml', ['$sce', function ($sce) {
+  return function (val) {
+    return val.length > 15 ? $sce.trustAsHtml('<div style="max-height: 20em; overflow:auto;">' + val + '</div>') : '';
+  };
+}]);
+
+/**
+ * marketplace directives
+ */
+
+import flyoutDirective from './directives/marketplace/flyout-directive.js';
+//angular.module('kyc-wallet', [flyoutDirective.name]);
+app.requires.push(flyoutDirective.name);
+
+
+/**
  * marketplace controllers
  */
+import MarketplaceRootController from './controllers/member/marketplace/marketplace-controller.js';
 import MarketplaceWalletsController from './controllers/member/marketplace/wallets-controller.js';
 import MarketplacePassportsController from './controllers/member/marketplace/passports-controller.js';
 
+
 angular.module('kyc-wallet').controller('MarketplaceWalletsController', MarketplaceWalletsController);
 angular.module('kyc-wallet').controller('MarketplacePassportsController', MarketplacePassportsController);
+angular.module('kyc-wallet').controller('MarketplaceRootController', MarketplaceRootController);
 
 /**
  * config states
