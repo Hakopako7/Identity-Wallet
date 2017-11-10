@@ -4,11 +4,8 @@
  * External Modules
  */
 import uiRouter from '@uirouter/angularjs';
-
 import angularMaterial from 'angular-material';
-
 import LocalStorageModule from 'angular-local-storage';
-
 
 /**
  * Internal Modules
@@ -27,6 +24,8 @@ import ElectronService from './services/electron.service';
 import ConfigStorageService from './services/config-storage.service';
 import IndexedDBService from './services/indexed-db.service';
 import CommonService from './services/common.service';
+import EtherscanService from './services/etherscan.service';
+import EtherUnitsService from './services/ether-units.service';
 
 import CountdownDirective from './directives/countdown.directive';
 import KycProfileImageDirective from './directives/kyc-profile-image.directive';
@@ -62,6 +61,8 @@ angular.module('kyc-wallet').service('ElectronService', ElectronService);
 angular.module('kyc-wallet').service('ConfigStorageService', ConfigStorageService);
 angular.module('kyc-wallet').service('IndexedDBService', IndexedDBService);
 angular.module('kyc-wallet').service('CommonService', CommonService);
+angular.module('kyc-wallet').service('EtherscanService', EtherscanService);
+angular.module('kyc-wallet').service('EtherUnitsService', EtherUnitsService);
 
 /**
  * directives
