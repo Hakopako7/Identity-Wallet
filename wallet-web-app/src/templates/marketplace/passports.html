@@ -1,0 +1,24 @@
+<table id="table-country-list" class="table country-list table-striped fixed-layout marketplaces">
+    <thead>
+        <tr>
+            <th style="width:15%">Country</th>
+            <th style="width:20%">Program</th>
+            <th style="width:20%" class="hidden-sm-down">type</th>
+            <th style="width:20%" class="hidden-sm-down">Visa Free Relevant Countries</th>
+            <th style="width:5%">Visa Free</th>
+            <th style="width:10%" class="numeric">Investment Single</th>
+            <th style="width:10%" class="hidden-sm-down numeric">Investment Family 4</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="c in data">
+            <td>{{ c.data.fields.Country }}</td>
+            <td>{{ c.data.fields['program name'] }}</td>
+            <td ng-bind-html="c.data.fields['Program Type (residency vs. citizenship) ONLY'] | displayList"></td>
+            <td ng-bind-html="c.data.fields['visa-free-relevant-countries'] | displayList"></td>
+            <td>{{ c.data.fields['visa-free'] }}</td>
+            <td>{{ c.data.fields['Investment amount single applicant'] }}</td>
+            <td>{{ c.data.fields['Investment amount 4-member family'] }}</td>
+        </tr>
+    </tbody>
+</table>

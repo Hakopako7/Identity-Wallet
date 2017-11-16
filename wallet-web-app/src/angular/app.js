@@ -26,6 +26,7 @@ import IndexedDBService from './services/indexed-db.service';
 import CommonService from './services/common.service';
 import EtherscanService from './services/etherscan.service';
 import EtherUnitsService from './services/ether-units.service';
+import MarketplaceSyncService from './services/marketplace-sync.service';
 
 import CountdownDirective from './directives/countdown.directive';
 import KycProfileImageDirective from './directives/kyc-profile-image.directive';
@@ -63,6 +64,7 @@ angular.module('kyc-wallet').service('IndexedDBService', IndexedDBService);
 angular.module('kyc-wallet').service('CommonService', CommonService);
 angular.module('kyc-wallet').service('EtherscanService', EtherscanService);
 angular.module('kyc-wallet').service('EtherUnitsService', EtherUnitsService);
+angular.module('kyc-wallet').service('MarketplaceSyncService', MarketplaceSyncService);
 
 /**
  * directives
@@ -119,6 +121,16 @@ angular.module('kyc-wallet').filter('unsafe', ['$sce', function ($sce) {
 angular.module('kyc-wallet').filter('longHtml', ['$sce', function ($sce) {
   return function (val) {
     return val.length > 15 ? $sce.trustAsHtml('<div style="max-height: 20em; overflow:auto;">' + val + '</div>') : '';
+  };
+}]);
+
+angular.module('kyc-wallet').filter('displayList', ['$sce', function ($sce) {
+  return function (val) {
+    if (!val) return;
+
+    let html = '';
+    val.forEach((v) => html += `<span>${v}</span>`);
+    return $sce.trustAsHtml(html);
   };
 }]);
 

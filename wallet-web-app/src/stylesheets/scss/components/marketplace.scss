@@ -158,12 +158,12 @@ a.badge {
 
 /* WALLETS CSS */
 
-.marketplace-wallets table {
+.marketplaces table {
   width: 100%;
   border-collapse: collapse;
 
 }
-.marketplace-wallets td, .marketplace-wallets th {
+.marketplaces td, .marketplaces th {
   vertical-align: bottom;
   border-bottom: 2px solid #eceeef;
   padding: 0.75rem;
@@ -172,7 +172,7 @@ a.badge {
   background: rgba(255,255,255,0.95);
   vertical-align: top;
 }
-.marketplace-wallets td img {
+.marketplaces td img {
   max-width: 50px;
   height: auto;
 }

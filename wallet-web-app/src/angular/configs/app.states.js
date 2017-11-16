@@ -143,11 +143,15 @@ function appStates ($urlRouterProvider, $stateProvider, $mdThemingProvider, CONF
 
     .state('member.marketplace.wallets', {
         url: '/member/marketplace/wallets',
+        
         views: {
             main: {
                 //templateUrl: 'member/marketplace/main.html'
                 templateUrl: 'templates/marketplace/wallets.html',
-                controller: 'MarketplaceWalletsController'
+                controller: 'MarketplaceWalletsController',
+            },
+            flyout: {
+                templateUrl: 'templates/marketplace/wallets-flyout.html',
             }
         }
     })
