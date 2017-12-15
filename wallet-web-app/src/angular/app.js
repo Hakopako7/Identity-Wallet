@@ -58,6 +58,31 @@ angular.module('kyc-wallet').constant('EVENTS', appEventsConstant);
 angular.module('kyc-wallet').filter('testFilter', appTestFilter);
 
 /**
+ * marketplace filters
+ */
+angular.module('kyc-wallet').filter('unsafe', ['$sce', function ($sce) {
+  return function (val) {
+    return $sce.trustAsHtml(val);
+  };
+}]);
+
+angular.module('kyc-wallet').filter('longHtml', ['$sce', function ($sce) {
+  return function (val) {
+    return val.length > 15 ? $sce.trustAsHtml('<div style="max-height: 20em; overflow:auto;">' + val + '</div>') : '';
+  };
+}]);
+
+angular.module('kyc-wallet').filter('displayList', ['$sce', function ($sce) {
+  return function (val) {
+    if (!val) return;
+
+    let html = '';
+    val.forEach((v) => html += `<span style="display:inline-block; font-size:10px; cursor:pointer; border-radius: 4px; background-color: #0071d7; padding: 2px 4px; margin: 0 4px 4px 0">${v}</span>`);
+    return $sce.trustAsHtml(html);
+  };
+}]);
+
+/**
  * services
  */
 import ElectronService from './services/electron.service';
@@ -92,6 +117,10 @@ angular.module('kyc-wallet').service('TokenService', TokenService);
 
 import SelfkeyService from './services/selfkey.service';
 angular.module('kyc-wallet').service('selfkeyService', SelfkeyService);
+
+import MarketplaceSyncService from './services/marketplace-sync.service';
+angular.module('kyc-wallet').service('MarketplaceSyncService', MarketplaceSyncService);
+
 
 /**
  * directives
@@ -216,6 +245,9 @@ angular.module('kyc-wallet').controller('MemberSettingsMainController', MemberSe
 import MarketplaceRootController from './controllers/member/marketplace/marketplace-controller.js';
 angular.module('kyc-wallet').controller('MarketplaceRootController', MarketplaceRootController);
 
+import { MarketplacePassportsController, MarketplacePassportsDetailController } from './controllers/member/marketplace/passports-controller.js';
+angular.module('kyc-wallet').controller('MarketplacePassportsController', MarketplacePassportsController);
+angular.module('kyc-wallet').controller('MarketplacePassportsDetailController', MarketplacePassportsDetailController);
 //import MemberMarketplaceMainController from './controllers/member/marketplace/main-controller.js';
 //angular.module('kyc-wallet').controller('MemberMarketplaceMainController', MemberMarketplaceMainController);
 /**

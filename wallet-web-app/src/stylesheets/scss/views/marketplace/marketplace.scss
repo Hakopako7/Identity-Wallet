@@ -158,19 +158,30 @@
   
   /* WALLETS CSS */
   
+  .marketplaces h3 {
+	color: #0dc7dd;
+	font-family: 'ProximaNovaRegular';
+	font-weight: bold;
+  }
   .marketplaces table {
 	width: 100%;
 	border-collapse: collapse;
-  
+	color: #FFF;
+	font-family: 'ProximaNovaRegular';
+	font-size: 14px;
   }
   .marketplaces td, .marketplaces th {
+	font-family: ProximaNovaRegular;
 	vertical-align: bottom;
-	border-bottom: 2px solid #eceeef;
+	border-bottom: 2px solid #303c49;
 	padding: 0.75rem;
-	border-top: 1px solid #eceeef;
+	border-top: 1px solid #303c49;
 	text-align: left;
-	background: rgba(255,255,255,0.95);
 	vertical-align: top;
+	color: #FFF;
+  }
+  .marketplaces th {
+	font-size: 16px;
   }
   .marketplaces td img {
 	max-width: 50px;
@@ -192,7 +203,6 @@
 		height: 100%;
 		display: block;
 		opacity: 0.8;
-		background: #FFF;
 		position: fixed;
 		z-index: 8888;
 		top:0;

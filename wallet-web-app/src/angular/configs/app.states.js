@@ -271,7 +271,6 @@ function appStates($urlRouterProvider, $stateProvider, $mdThemingProvider, CONFI
             url: '/member/marketplace/main',
             views: {
                 main: {
-                    //templateUrl: 'member/marketplace/main.html'
                     templateUrl: 'templates/member/marketplace/main.html',
                 }
             }
@@ -279,12 +278,21 @@ function appStates($urlRouterProvider, $stateProvider, $mdThemingProvider, CONFI
 
 
         .state('member.marketplace.passports', {
-            url: '/member/marketplace/passports',
+            url: '/member/marketplace/passports/list',
             views: {
                 main: {
-                    //templateUrl: 'member/marketplace/main.html'
-                    templateUrl: 'templates/member/marketplace/passports.html',
+                    templateUrl: 'templates/member/marketplace/passports/list.html',
                     controller: 'MarketplacePassportsController'
+                }
+            }
+        })
+
+        .state('member.marketplace.passports-detail', {
+            url: '/member/marketplace/passports/detail',
+            views: {
+                main: {
+                    templateUrl: 'templates/member/marketplace/passports/detail.html',
+                    controller: 'MarketplacePassportsDetailController'
                 }
             }
         })
