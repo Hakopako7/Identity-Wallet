@@ -2,7 +2,7 @@ module.exports = (gulp, path, watch, runSequence) => {
 	const pug = require('gulp-pug');
     const templateCache = require('gulp-angular-templatecache');
 
-    const src = path.resolve(__dirname, '../../src/templates/**/*.pug');
+    const src = path.resolve(__dirname, '../../src/templates/**/*.{pug}');
     const dest = path.resolve(__dirname, '../../src/angular');
 
 	gulp.task('transpile:webapp:templates', (cb) => {

@@ -1,5 +1,5 @@
 function MarketplaceRootController($rootScope, $scope, $log, $mdDialog, ElectronService, ConfigStorageService, CommonService) {
-    'ngInject'
+	'ngInject'
 
 	console.log('MarketplaceRootController init');
 

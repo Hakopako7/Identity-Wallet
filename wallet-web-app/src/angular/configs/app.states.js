@@ -260,6 +260,7 @@ function appStates($urlRouterProvider, $stateProvider, $mdThemingProvider, CONFI
             abstract: true,
             views: {
                 main: {
+                    //templateUrl: 'templates/member/marketplace/layout.html',
                     templateUrl: 'member/marketplace/layout.html',
                     controller: 'MarketplaceRootController'
                 }
@@ -271,7 +272,7 @@ function appStates($urlRouterProvider, $stateProvider, $mdThemingProvider, CONFI
             views: {
                 main: {
                     //templateUrl: 'member/marketplace/main.html'
-                    templateUrl: 'templates/marketplace/main.html',
+                    templateUrl: 'templates/member/marketplace/main.html',
                 }
             }
         })
@@ -282,7 +283,7 @@ function appStates($urlRouterProvider, $stateProvider, $mdThemingProvider, CONFI
             views: {
                 main: {
                     //templateUrl: 'member/marketplace/main.html'
-                    templateUrl: 'templates/marketplace/passports.html',
+                    templateUrl: 'templates/member/marketplace/passports.html',
                     controller: 'MarketplacePassportsController'
                 }
             }
@@ -294,11 +295,11 @@ function appStates($urlRouterProvider, $stateProvider, $mdThemingProvider, CONFI
             views: {
                 main: {
                     //templateUrl: 'member/marketplace/main.html'
-                    templateUrl: 'templates/marketplace/ico-list.html',
+                    templateUrl: 'templates/member/marketplace/ico-list.html',
                     controller: 'MarketplaceWalletsController',
                 },
                 flyout: {
-                    templateUrl: 'templates/marketplace/ico-list-flyout.html',
+                    templateUrl: 'templates/member/marketplace/ico-list-flyout.html',
                 }
             }
         })
