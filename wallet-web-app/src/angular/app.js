@@ -213,8 +213,9 @@ angular.module('kyc-wallet').controller('MemberSettingsMainController', MemberSe
 /**
  * Marketplace
  */
-import MemberMarketplaceMainController from './controllers/member/marketplace/main-controller.js';
-angular.module('kyc-wallet').controller('MemberMarketplaceMainController', MemberMarketplaceMainController);
+import MarketplaceRootController from './controllers/member/marketplace/marketplace-controller.js';
+//import MemberMarketplaceMainController from './controllers/member/marketplace/main-controller.js';
+//angular.module('kyc-wallet').controller('MemberMarketplaceMainController', MemberMarketplaceMainController);
 /**
  * config states
  */

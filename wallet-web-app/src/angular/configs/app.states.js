@@ -254,13 +254,14 @@ function appStates($urlRouterProvider, $stateProvider, $mdThemingProvider, CONFI
         })
 
         /**
-         * Marketplace
+         * marketplace
          */
         .state('member.marketplace', {
             abstract: true,
             views: {
                 main: {
-                    templateUrl: 'member/marketplace/layout.html'
+                    templateUrl: 'member/marketplace/layout.html',
+                    controller: 'MarketplaceRootController'
                 }
             }
         })
@@ -269,25 +270,35 @@ function appStates($urlRouterProvider, $stateProvider, $mdThemingProvider, CONFI
             url: '/member/marketplace/main',
             views: {
                 main: {
-                    templateUrl: 'member/marketplace/main.html'
+                    //templateUrl: 'member/marketplace/main.html'
+                    templateUrl: 'templates/marketplace/main.html',
+                }
+            }
+        })
+
+
+        .state('member.marketplace.passports', {
+            url: '/member/marketplace/passports',
+            views: {
+                main: {
+                    //templateUrl: 'member/marketplace/main.html'
+                    templateUrl: 'templates/marketplace/passports.html',
+                    controller: 'MarketplacePassportsController'
                 }
             }
         })
 
         .state('member.marketplace.ico-list', {
-            url: '/member/marketplace/ico/list',
+            url: '/member/marketplace/ico-list',
+            
             views: {
                 main: {
-                    templateUrl: 'member/marketplace/ico/list.html'
-                }
-            }
-        })
-
-        .state('member.marketplace.ico-item', {
-            url: '/member/marketplace/ico/item/:id',
-            views: {
-                main: {
-                    templateUrl: 'member/marketplace/ico/item.html'
+                    //templateUrl: 'member/marketplace/main.html'
+                    templateUrl: 'templates/marketplace/ico-list.html',
+                    controller: 'MarketplaceWalletsController',
+                },
+                flyout: {
+                    templateUrl: 'templates/marketplace/ico-list-flyout.html',
                 }
             }
         })

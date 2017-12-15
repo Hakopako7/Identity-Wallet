@@ -13,8 +13,10 @@ function createWindow(app, next) {
         });
 
         // If DEV loads electron source files from 'src' folder instead of 'dist' folder
+        const loadPath = app.config.DEV ? 'wallet-web-app/dist' : 'wallet-web-app/src';
+
         app.win.loadURL(app.modules.url.format({
-            pathname: app.modules.path.join(app.dir.root, 'wallet-web-app/dist', 'index.html'),
+            pathname: app.modules.path.join(app.dir.root, loadPath, 'index.html'),
             protocol: 'file:',
             slashes: true
         }));
