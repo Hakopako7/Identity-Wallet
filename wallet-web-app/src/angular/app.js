@@ -162,6 +162,9 @@ angular.module('kyc-wallet').directive('skWalletDocumentBox', SkWalletDocumentBo
 import SkDialogDirective from './directives/commons/sk-dialog.directive';
 angular.module('kyc-wallet').directive('skDialog', SkDialogDirective);
 
+import SkUserInfoBoxDirective from './directives/commons/sk-user-info-box.directive';
+angular.module('kyc-wallet').directive('skUserInfoBox', SkUserInfoBoxDirective);
+
 
 
 /**
@@ -215,6 +218,12 @@ angular.module('kyc-wallet').controller('MemberSetupStep3Controller', MemberSetu
  */
 import MemberDashboardMainController from './controllers/member/dashboard/main-controller.js';
 angular.module('kyc-wallet').controller('MemberDashboardMainController', MemberDashboardMainController);
+
+/**
+ * wallet
+ */
+import MemberWalletMainController from './controllers/member/wallet/main-controller.js';
+angular.module('kyc-wallet').controller('MemberWalletMainController', MemberWalletMainController);
 
 
 /**
