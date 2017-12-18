@@ -289,6 +289,7 @@ function appStates($urlRouterProvider, $stateProvider, $mdThemingProvider, CONFI
 
         .state('member.marketplace.passports-detail', {
             url: '/member/marketplace/passports/detail',
+            params: { data: null },
             views: {
                 main: {
                     templateUrl: 'templates/member/marketplace/passports/detail.html',

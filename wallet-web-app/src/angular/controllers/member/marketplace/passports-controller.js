@@ -10,16 +10,19 @@ function MarketplacePassportsController($rootScope, $scope, $log, $mdDialog, $st
 	
 	$scope.showDetailView = function(p) {
 		console.log(p);
-		$state.go('member.marketplace.passports-detail', { data: p }, {reload:false});
+		$state.go('member.marketplace.passports-detail', { data: p });
 	}
 
 }
 
-function MarketplacePassportsDetailController($rootScope, $scope, $log, $mdDialog, $state) {
+function MarketplacePassportsDetailController($rootScope, $scope, $log, $stateParams) {
 	'ngInject'
 
 	$log.info('MarketplacePassportsDetailController');
+
+	$scope.data = $stateParams.data.data.fields;
 	
+	$log.info($scope.data);
 	
 }
 
