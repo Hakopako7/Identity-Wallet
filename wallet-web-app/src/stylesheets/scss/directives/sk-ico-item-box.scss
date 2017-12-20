@@ -1,7 +1,14 @@
-.sk-ico-box {
+.sk-ico-item-box {
     padding: 0;
+    min-width: 360px;
+    display: flex;
+    flex-direction: column;
+    width: 32% !important;
+    margin: 6px !important;
 
-    .sk-ico-box__header {
+    min-height: 330px;
+
+    .sk-ico-item-box__header {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -21,17 +28,19 @@
             height: 14px;
             width: 14px;
             border-radius: 50%;
-            margin-left: auto;
             &.active{
                 background-color: #1ed43b;
             }
             &.inactive{
                 background-color: #d9534f;
             }
+            &.upcoming{
+                background-color: #f0ad4e;
+            }
         }
     }
 
-    .sk-ico-box__content {
+    .sk-ico-item-box__content {
         padding: 30px;
 
         table {
@@ -50,11 +59,12 @@
             }
         }
       .price {
+        font-size: 15px;
         color: white;
       }
     }
 
-    .sk-ico-box__footer {
+    .sk-ico-item-box__footer {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -63,6 +73,7 @@
         padding: 0 30px 30px 30px;
 
         .days{
+            margin-left: 36px;
             font-family: ProximaNovaRegular;
             font-size: 13px;
             color: #93b0c1;

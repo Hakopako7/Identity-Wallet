@@ -1,5 +1,7 @@
 'use strict';
 
+import Ico from '../classes/ico.js';
+
 function appStates($urlRouterProvider, $stateProvider, $mdThemingProvider, CONFIG, localStorageServiceProvider) {
     'ngInject'
 
@@ -141,45 +143,25 @@ function appStates($urlRouterProvider, $stateProvider, $mdThemingProvider, CONFI
                 checkSetupProgress: ($rootScope, $q, $state, ConfigFileService) => {
                     let defer = $q.defer();
 
-                    $rootScope.initialSetupProgress = {
-                        "full-name": false,
-                        "email": false,
-                        "phone-number": false,
-                        "passport": false,
-                        "national-id": false,
-                        "utility-bill": false
-                    }
-                    
-                    ConfigFileService.load().then(()=>{
-                        let fullNames = ConfigFileService.findContactsByType('full-name');
-                        let emails = ConfigFileService.findContactsByType('email');
-                        let phoneNumbers = ConfigFileService.findContactsByType('phone-number');
+                    $rootScope.initialSetupProgress = {};
+                    let isMissing = false;
 
-                        let passports = ConfigFileService.getDocumentsByType('passport');
-                        let nationalIds = ConfigFileService.getDocumentsByType('national-id');
-                        let utilityBills = ConfigFileService.getDocumentsByType('utility-bill');
-                        
-                        $rootScope.initialSetupProgress["full-name"] = fullNames.length > 0 ? true : false;
-                        $rootScope.initialSetupProgress["email"] = emails.length > 0 ? true : false;
-                        $rootScope.initialSetupProgress["phone-number"] = phoneNumbers.length > 0 ? true : false;
-                        $rootScope.initialSetupProgress["passport"] = passports.length > 0 ? true : false;
-                        $rootScope.initialSetupProgress["national-id"] = nationalIds.length > 0 ? true : false;
-                        $rootScope.initialSetupProgress["utility-bill"] = utilityBills.length > 0 ? true : false;
+                    ConfigFileService.load().then(() => {
+                        for (let i in $rootScope.INITIAL_ID_ATTRIBUTES) {
+                            let attr = $rootScope.INITIAL_ID_ATTRIBUTES[i];
+                            $rootScope.initialSetupProgress[attr] = ConfigFileService.getDefaultIdAttributeItem(attr);
 
-                        let isMissing = false;
-                        for(let i in $rootScope.initialSetupProgress){
-                            if(!$rootScope.initialSetupProgress[i]){
+                            if (!$rootScope.initialSetupProgress[attr] || (!$rootScope.initialSetupProgress[attr].value && !$rootScope.initialSetupProgress[attr].path)) {
                                 isMissing = true;
-                                break;
                             }
                         }
 
-                        if(isMissing){
+                        if (isMissing) {
                             defer.resolve();
-                        }else{
+                        } else {
                             $state.go('member.dashboard.main');
                         }
-                    }).catch(()=>{
+                    }).catch(() => {
                         defer.reject();
                     });
 
@@ -298,21 +280,45 @@ function appStates($urlRouterProvider, $stateProvider, $mdThemingProvider, CONFI
             }
         })
 
-        .state('member.marketplace.ico-list', {
-            url: '/member/marketplace/ico-list',
-            
+        .state('member.marketplace.ico-item', {
+            url: '/member/marketplace/ico/item',
             views: {
                 main: {
-                    //templateUrl: 'member/marketplace/main.html'
-                    templateUrl: 'templates/member/marketplace/ico-list.html',
-                    controller: 'MarketplaceWalletsController',
-                },
-                flyout: {
-                    templateUrl: 'templates/member/marketplace/ico-list-flyout.html',
+                    templateUrl: 'member/marketplace/ico/item.html',
+                    controller: 'MemberMarketplaceIcoItemController'
                 }
+            },
+            params: {
+                selected: null
             }
         })
 
+        .state('member.marketplace.ico-manage-requirements', {
+            url: '/member/marketplace/ico/ico-manage-requirements',
+            views: {
+                main: {
+                    templateUrl: 'member/marketplace/ico/manage-requirements.html',
+                    controller: 'MemberMarketplaceIcoManageRequirementsController'
+                }
+            },
+            params: {
+                selected: null
+            }
+        })
+
+        .state('member.marketplace.ico-accept-terms', {
+            url: '/member/marketplace/ico/ico-accept-terms',
+            views: {
+                main: {
+                    templateUrl: 'member/marketplace/ico/accept-terms.html',
+                    controller: 'MemberMarketplaceIcoAcceptTermsController'
+                }
+            },
+            params: {
+                selected: null
+            }
+        })
+        
         /**
          * Wallet
          */
@@ -329,12 +335,22 @@ function appStates($urlRouterProvider, $stateProvider, $mdThemingProvider, CONFI
             url: '/member/wallet/main',
             views: {
                 main: {
-                    templateUrl: 'member/wallet/main.html'
+                    templateUrl: 'member/wallet/main.html',
+                    controller: 'MemberWalletMainController'
                 }
             }
         })
 
-    
+        .state('member.wallet.manage-token', {
+            url: '/member/wallet/token/:id/manage',
+            views: {
+                main: {
+                    templateUrl: 'member/wallet/manage-token.html'
+                }
+            }
+        })
+
+
     $urlRouterProvider.otherwise('/guest/loading');
 
     //$urlRouterProvider.otherwise('/member/wallet/main');

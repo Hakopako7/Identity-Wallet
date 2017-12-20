@@ -1,0 +1,20 @@
+.sk-box.sk-ico-item-box
+    .header.sk-ico-item-box__header
+        sk-icon(icon="{{icoData.data.fields.symbol.toLowerCase()}}", size-class="icon-size-44x44")
+        span {{icoData.data.fields.company}}
+        span(style="font-size: 15px; margin-left: 4px;", flex) ({{icoData.data.fields.category}})
+        span.dot(ng-class="{'active': icoData.data.fields.status === 'In Progress', 'inactive': icoData.data.fields.status === 'Finished', 'upcoming': icoData.data.fields.status === 'Upcoming' }")
+
+    .sk-ico-item-box__content(flex)
+        .description.fc-white
+            p {{icoData.data.fields.description}}
+            .price.fc-white
+                span.fc-turquoise-blue {{icoData.data.fields.raised_USD.toFixed(2)}} USD &nbsp; 
+                span of &nbsp; {{icoData.data.fields.hard_cap_USD}}
+
+    // TODO - change url later
+    .sk-ico-item-box__footer
+        .sk-button.small(ui-sref="member.marketplace.ico-item({selected: icoData})")
+            span view
+
+        span.days ends on {{icoData.data.fields.end_date}}

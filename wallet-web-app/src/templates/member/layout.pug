@@ -13,9 +13,9 @@ md-sidenav.md-sidenav-right(md-component-id="right")
         .sk-right-sidenav__h-divider
 
         .sk-right-sidenav__section
-            .sk-right-sidenav__section__item(ng-class="getSelectedClass('member.wallet')", ui-sref="member.wallet.main") Identity Wallet
+            .sk-right-sidenav__section__item(ng-class="getSelectedClass('member.wallet')", ng-click="$root.navigate($event, 'member.wallet.main')") Identity Wallet
             
         .sk-right-sidenav__h-divider
 
-        .sk-right-sidenav__section
+        //.sk-right-sidenav__section
             .sk-right-sidenav__section__item Preferences

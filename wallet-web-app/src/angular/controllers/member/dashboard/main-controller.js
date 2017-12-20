@@ -1,4 +1,4 @@
-function MemberDashboardMainController($rootScope, $scope, $log, $q, $timeout, $mdSidenav, ConfigFileService, CommonService, ElectronService, EtherScanService) {
+function MemberDashboardMainController($rootScope, $scope, $log, $q, $timeout, $mdSidenav, ConfigFileService, CommonService, ElectronService, EtherScanService, MarketplaceSyncService) {
     'ngInject'
 
     $log.info('MemberDashboardMainController');
@@ -23,8 +23,19 @@ function MemberDashboardMainController($rootScope, $scope, $log, $q, $timeout, $
             value: 852.56487,
             color: '#9a4786',
             icon: 'unk'
+        },{
+            title: 'Tmp a litle long',
+            subTitle: 'rep2',
+            value: 852.56487,
+            color: 'red',
+            icon: 'unk'
         }]
     }
+
+    MarketplaceSyncService.fetch('icos').then((data) => {
+        $scope.icos = data['ICO_Details'].filter((d) => d.data.fields['symbol']);
+        console.log($scope.icos);
+    });
 
 };
 

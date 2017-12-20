@@ -13,7 +13,9 @@ function MarketplaceSyncService($rootScope, $log, $q, $http, CONFIG, localStorag
 
         fetch (table) {
             const cache_data = CACHE.getItem(table);
+
             if (cache_data) {
+                console.log("Returning data from cache", table);
                 return new Promise((resolve, reject) => resolve(JSON.parse(cache_data)));
             }
 
