@@ -280,6 +280,16 @@ function appStates($urlRouterProvider, $stateProvider, $mdThemingProvider, CONFI
             }
         })
 
+        .state('member.marketplace.ico-list', {
+            url: '/member/marketplace/ico/list',
+            views: {
+                main: {
+                    templateUrl: 'member/marketplace/ico/list.html',
+                    controller: 'MarketplacePassportsDetailController'
+                }
+            }
+        })
+
         .state('member.marketplace.ico-item', {
             url: '/member/marketplace/ico/item',
             views: {
