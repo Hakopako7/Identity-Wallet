@@ -16,6 +16,8 @@ function MemberLayoutController($rootScope, $scope, $log, $mdDialog, $mdSidenav,
         });
     }
 
+    Web3Service.syncWalletActivity();
+
     $rootScope.goToSelfkeyIco = (event) => {
         let ico = null;
         let icos = ConfigFileService.getIcos();

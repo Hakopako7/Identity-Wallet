@@ -16,7 +16,7 @@ function dec2hexString(dec) {
 
 // documentation
 // https://www.myetherapi.com/
-function Web3Service($rootScope, $window, $q, $timeout, $log, $http, $httpParamSerializerJQLike, EVENTS, ElectronService, CommonService, $interval) {
+function Web3Service($rootScope, $window, $q, $timeout, $log, $http, $httpParamSerializerJQLike, EVENTS, ElectronService, CommonService, $interval,ConfigFileService) {
   'ngInject';
 
   $log.info('Web3Service Initialized');
@@ -91,6 +91,117 @@ function Web3Service($rootScope, $window, $q, $timeout, $log, $http, $httpParamS
         
       }, 1);
 
+    }
+
+    syncWalletActivity() {
+      debugger;
+    
+      let store = ConfigFileService.getStore();
+      let walletKeys = Object.keys(store.wallets);
+      if (!walletKeys.length) {
+        return;
+      }
+
+      let prefix = '0x';
+      let valueDivider = 10 ** 18;
+      let activities = store.walletsActivity = store.walletsActivity || {};
+
+      walletKeys.forEach((walletKey) => {
+        activities[walletKey] = activities[walletKey] || {}; 
+        //TODO werbose
+        activities[walletKey].transactions = activities[walletKey].transactions || [];
+        
+        //remove last transaction we are processing again TODO
+        activities[walletKey].transactions.splice(activities[walletKey].transactions.length-1,1);
+      });
+      
+      let updateLastBlockNumber = (lastBlockNumber) => {
+        activities.lastBlockNumber = lastBlockNumber; 
+      };
+
+      let addNewTransaction = (walletKey,transaction) => {
+        if (walletKey == transaction.to) {
+          delete transaction.to;
+        }
+        if (walletKey == transaction.from) {
+          delete transaction.from;
+        }
+        activities[walletKey].transactions.push(transaction);
+      };
+     
+      debugger;
+      Web3Service.getMostRecentBlockNumber().then((blockNumber) => {
+        let previousLastBlockNumber = activities.lastBlockNumber || blockNumber;
+        let blockNumbersToProcess = [];
+        for (let i = previousLastBlockNumber; i <= blockNumber; i++) {
+          blockNumbersToProcess.push(i);
+        }
+        updateLastBlockNumber(blockNumber);
+
+        (function next() {
+
+          if (blockNumbersToProcess.length === 0) {
+            ConfigFileService.save().then(() => {
+              //TODO procesing is end
+              debugger;
+              //TODO remove just test if it is saved
+              let store = ConfigFileService.getStore();
+            });
+
+           
+            
+          }
+
+          Web3Service.getBlock(blockNumbersToProcess.shift(), true).then((blockData) => {
+            if (blockData) {
+              console.log(blockData);
+              if (blockData && blockData.transactions) {
+                blockData.transactions.forEach(transaction => {
+                  let from = transaction.from ? transaction.from.toLowerCase() : null; 
+                  let to = transaction.to ? transaction.to.toLowerCase() : null; 
+                 
+                  walletKeys.forEach((walletKey) => {
+                    let fullAddressHex = prefix + walletKey;
+
+                    if (from == fullAddressHex || to == fullAddressHex) {
+                      addNewTransaction(walletKey,{
+                        to: transaction.to,
+                        from: transaction.from,
+                        timestamp: blockData.timestamp, //TODO
+                        value: transaction.value/valueDivider //TODO
+                      });
+                    }
+
+                  });
+
+                  
+                });
+              }
+            }
+            next();
+          });
+
+        })();
+      });
+    }
+
+    static getBlock(blockNumber, withTransactions) {
+      withTransactions = withTransactions || false;
+      let defer = $q.defer();
+
+      // wei
+      Web3Service.waitForTicket(defer, 'getBlock', [blockNumber, withTransactions]);
+
+      return defer.promise;
+    }
+
+    static getMostRecentBlockNumber() {
+      let defer = $q.defer();
+
+      // wei
+      Web3Service.waitForTicket(defer, 'getBlockNumber', []);
+
+      return defer.promise;
     }
 
     getBalance(addressHex) {
