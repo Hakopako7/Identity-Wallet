@@ -5,33 +5,40 @@
         table.sk-wallet-general-info-box__content__table
             tr
                 td.fc-bluey-grey Name:
-                td
-                    div 
-                        sk-icon(icon="success-box", size-class="icon-size-16x16")
-                        span.fc-white Valletta, Malta
+                td(ng-click="openAddEditDialog($event, 'edit', data, 'name')")
+                    div
+                        sk-icon(icon="{{ data.name.items[data.name.defaultItemId].value ? 'success-box' : 'warning-box' }}", size-class="icon-size-16x16")
+                        //span.fc-white Valletta, Malta
+                        span.fc-white {{data.name.items[data.name.defaultItemId].value ? data.name.items[data.name.defaultItemId].value : 'missing' }}
+
             tr
                 td.fc-bluey-grey Email:
-                td
-                    div 
-                        sk-icon(icon="warning-box", size-class="icon-size-16x16")
-                        span.fc-white andrew@thejones.com
+                td(ng-click="openAddEditDialog($event, 'edit', data, 'email')")
+                    div
+                        sk-icon(icon="{{ data.email.items[data.email.defaultItemId].value ? 'success-box' : 'warning-box' }}", size-class="icon-size-16x16")
+                        //span.fc-white andrew@thejones.com
+                        span.fc-white {{data.email.items[data.email.defaultItemId].value ? data.email.items[data.email.defaultItemId].value : 'missing' }}
             tr
                 td
                     div 
                         span.fc-bluey-grey Avatar:
                         span(style="color: #7f8fa4; font-family: ProximaNovaRegular; margin-top: 8px;") JPG, max. 500KB
-                td 
-                    div
-                        img(src='assets/images/temp/avatar.jpg')
+                td
+                    .img-section
+                        div.image-container(style="position:relative; background-color: lightgray;clip-path:polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);width:73px;height:84px;overflow:hidden;")
+                            //img.drag-image(my-draggable='',ng-src='profile.picture.path ? profile.picture.path : assets/images/temp/avatar.jpg')
+                            img.drag-image(my-draggable='',ng-src='assets/images/temp/carlosbg.jpg')
+                        button(ng-click="openAddEditDialog($event, 'edit', data)") Upload Image
+
             tr
                 td.fc-bluey-grey Mobile:
-                td 
+                td(ng-click="openAddEditDialog($event, 'edit', data, 'mobile')")
                     div 
                         sk-icon(icon="success-box", size-class="icon-size-16x16")
                         span.fc-white +356 345 5568
             tr
                 td.fc-bluey-grey Country:
-                td 
+                td(ng-click="openAddEditDialog($event, 'edit', data, 'country')")
                     div 
-                        sk-icon(icon="danger-box", size-class="icon-size-16x16")
-                        span.fc-white Malta
+                        sk-icon(icon="{{ data.country_of_residency.items[data.country_of_residency.defaultItemId].value ? 'success-box' : 'warning-box' }}", size-class="icon-size-16x16")
+                        span.fc-white {{data.country_of_residency.items[data.country_of_residency.defaultItemId].value ? data.country_of_residency.items[data.country_of_residency.defaultItemId].value : 'missing' }}

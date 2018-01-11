@@ -1,0 +1,23 @@
+md-dialog.add-edit-id-attributes(aria-label="{{config.title}}")
+
+    .static-data-wrapper(ng-if="config.fieldName")
+        form.static-data-form(name="static-data-form")
+            .static-data-form-content
+                span {{config.title}}
+                input(type="text", ng-model="item[config.fieldName]", placeholder="{{config.name}}")
+            .static-data-form-buttons
+                button.cancel-button(ng-click="cancel($event)")
+                    span Cancel
+                button.save-button(ng-click="save($event)")
+                    span save
+    .document-wrapper(ng-if="!config.fieldName")
+        .upload-section
+            .title {{config.title}}
+            .content
+                .section(ng-click="selectFile($event)")
+                    img(src="assets/images/icons/upload.svg")
+                    .name {{ item.value ? item.value : 'Upload Photo' }}
+
+        .action-buttons
+            button.cancel(ng-click="cancel($event)") Cancel
+            button.save(ng-click="save($event)") Save

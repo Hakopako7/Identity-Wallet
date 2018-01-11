@@ -183,6 +183,9 @@ angular.module('kyc-wallet').directive('skActionLogsBox', SkActionLogsBoxDirecti
 import ScrollToEndDirective from './angular/directives/commons/scroll-to-end.directive';
 angular.module('kyc-wallet').directive('scrollToEnd', ScrollToEndDirective);
 
+import DragImageDirective from './angular/directives/commons/drag-image.directive';
+angular.module('kyc-wallet').directive('myDraggable', DragImageDirective);
+
 
 /**
  * controllers
@@ -208,6 +211,9 @@ angular.module('kyc-wallet').controller('SendTokenDialogController', SendTokenDi
 
 import AddIdAttributeDialog from './angular/controllers/commons/dialogs/add-id-attribute-controller.js';
 angular.module('kyc-wallet').controller('AddIdAttributeDialog', AddIdAttributeDialog);
+
+import EditGeneralInfoDialog from './angular/controllers/commons/dialogs/edit-general-info-controller.js';
+angular.module('kyc-wallet').controller('EditGeneralInfoDialog', EditGeneralInfoDialog);
 
 /**
  * guest

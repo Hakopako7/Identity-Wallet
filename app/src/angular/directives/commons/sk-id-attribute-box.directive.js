@@ -48,7 +48,6 @@ function SkIdAttributeBoxDirective($rootScope, $log, $window, $mdDialog, ConfigF
                     }
 
                     let itemToSave = store.idAttributes[item.idAttributeType.key].items[respItem._id];
-
                     itemToSave.name = respItem.name;
                     itemToSave.value = respItem.value;
                     if (scope.data.type === 'document') {
