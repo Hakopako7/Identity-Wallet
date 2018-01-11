@@ -105,28 +105,32 @@ function Web3Service($rootScope, $window, $q, $timeout, $log, $http, $httpParamS
       let prefix = '0x';
       let valueDivider = 10 ** 18;
       let activities = store.walletsActivity = store.walletsActivity || {};
-
       walletKeys.forEach((walletKey) => {
         activities[walletKey] = activities[walletKey] || {}; 
         //TODO werbose
-        activities[walletKey].transactions = activities[walletKey].transactions || [];
+        activities[walletKey].transactions = [];
+        activities[walletKey].blocks = activities[walletKey].blocks || {};
         
         //remove last transaction we are processing again TODO
-        activities[walletKey].transactions.splice(activities[walletKey].transactions.length-1,1);
+        if (activities.lastBlockNumber) {
+          delete activities[walletKey].blocks[activities.lastBlockNumber];
+        }
       });
       
       let updateLastBlockNumber = (lastBlockNumber) => {
         activities.lastBlockNumber = lastBlockNumber; 
       };
 
-      let addNewTransaction = (walletKey,transaction) => {
+      let addNewTransaction = (blockNumber,walletKey,transaction) => {
+        debugger;
         if (walletKey == transaction.to) {
           delete transaction.to;
         }
         if (walletKey == transaction.from) {
           delete transaction.from;
         }
-        activities[walletKey].transactions.push(transaction);
+        activities[walletKey].blocks[blockNumber] = activities[walletKey].blocks[blockNumber] || [];
+        activities[walletKey].blocks[blockNumber].push(transaction);
       };
      
       debugger;
@@ -141,7 +145,17 @@ function Web3Service($rootScope, $window, $q, $timeout, $log, $http, $httpParamS
         (function next() {
 
           if (blockNumbersToProcess.length === 0) {
+            debugger;
+            walletKeys.forEach((walletKey) => {
+              let blocks = activities[walletKey].blocks;
+              let blockKeys = Object.keys(blocks);
+              blockKeys.forEach(blockKey => {
+                activities[walletKey].transactions = activities[walletKey].transactions.concat(blocks[blockKey]);
+              });
+            });
+
             ConfigFileService.save().then(() => {
+             
               //TODO procesing is end
               debugger;
               //TODO remove just test if it is saved
@@ -152,7 +166,8 @@ function Web3Service($rootScope, $window, $q, $timeout, $log, $http, $httpParamS
             
           }
 
-          Web3Service.getBlock(blockNumbersToProcess.shift(), true).then((blockData) => {
+          let currentBlockNumber = blockNumbersToProcess.shift();
+          Web3Service.getBlock(currentBlockNumber, true).then((blockData) => {
             if (blockData) {
               console.log(blockData);
               if (blockData && blockData.transactions) {
@@ -164,7 +179,7 @@ function Web3Service($rootScope, $window, $q, $timeout, $log, $http, $httpParamS
                     let fullAddressHex = prefix + walletKey;
 
                     if (from == fullAddressHex || to == fullAddressHex) {
-                      addNewTransaction(walletKey,{
+                      addNewTransaction(currentBlockNumber,walletKey,{
                         to: transaction.to,
                         from: transaction.from,
                         timestamp: blockData.timestamp, //TODO
